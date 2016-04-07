@@ -29,7 +29,7 @@ You'll need to set the following environment variables to use these scripts:
 
 * `GITHUB_S3_BUCKET`: The name of the bucket you want to archive to.
 * `AWS_DEFAULT_REGION`: The AWS region your bucket is in.
-* `GITHUB_s3_GITHUB_TOKEN`: A GitHub access token with access to create and
+* `GITHUB_S3_GITHUB_TOKEN`: A GitHub access token with access to create and
   delete private repositories.
 
 ## Hyper loves you
