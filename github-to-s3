@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+set -e
+
+if [ -z $GITHUB_S3_BUCKET ]; then
+  echo 'Error: $GITHUB_S3_BUCKET must be set to the bucket you wish to archive the repository to'
+  return
+fi
+
+GITHUB_PATH=$1
+NAME=$(echo $GITHUB_PATH | sed 's/\//-/')
+ARCHIVE_PATH=/tmp/$NAME.tar.gz
+REPOSITORY_PATH=/tmp/$NAME
+
+rm -rf $REPOSITORY_PATH
+git clone git@github.com:$1 $REPOSITORY_PATH
+
+rm -rf $ARCHIVE_PATH
+tar -C /tmp -zcf $ARCHIVE_PATH $NAME
+
+aws s3 mv $ARCHIVE_PATH s3://$GITHUB_S3_BUCKET/$NAME.tar.gz
+
+curl -X DELETE -H "Authorization: token $GITHUB_S3_GITHUB_TOKEN" https://api.github.com/repos/$1
