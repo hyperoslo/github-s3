@@ -1,6 +1,6 @@
 # github-s3
 
-At Hyper, we make lots of things. Lots of those things are open source, but
+At Hyper, we make lots of things. Many of those things are open source, but
 there are also things that are closed source. We have a limited amount of private
 repositories on GitHub, though, so once we haven't needed to change them for a
 while we archive them to AWS S3.
