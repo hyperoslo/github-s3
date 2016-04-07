@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z $GITHUB_S3_BUCKET ]; then
+  echo 'Error: $GITHUB_S3_BUCKET must be set to the bucket you wish to restore the repository from'
+  return
+fi
+
+GITHUB_PATH=$1
+GITHUB_ORGANIZATION_NAME=$(echo $GITHUB_PATH | sed -E 's/^(.+)\/(.+)/\1/')
+GITHUB_REPOSITORY_NAME=$(echo $GITHUB_PATH | sed -E 's/^(.+)\/(.+)/\2/')
+NAME=$(echo $GITHUB_PATH | sed 's/\//-/')
+ARCHIVE_PATH=/tmp/$NAME.tar.gz
+REPOSITORY_PATH=/tmp/$NAME
+
+aws s3 mv s3://$GITHUB_S3_BUCKET/$NAME.tar.gz /tmp
+
+rm -rf $REPOSITORY_PATH
+tar -C /tmp -xf $ARCHIVE_PATH
+
+curl -s -X POST -H "Authorization: token $GITHUB_S3_GITHUB_TOKEN" \
+  https://api.github.com/orgs/$GITHUB_ORGANIZATION_NAME/repos \
+  -d "{\"name\":\"$GITHUB_REPOSITORY_NAME\", \"private\": true}" > /dev/null
+
+git -C $REPOSITORY_PATH push
