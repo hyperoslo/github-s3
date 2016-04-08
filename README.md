@@ -2,8 +2,8 @@
 
 At Hyper, we make lots of things. Many of those things are open source, but
 there are also things that are closed source. We have a limited amount of private
-repositories on GitHub, though, so once we haven't needed to change them for a
-while we archive them to AWS S3.
+repositories on GitHub, though, so once we haven't needed them for a while we
+archive them to AWS S3.
 
 These are shell scripts that make it really easy to archive and restore repositories
 between GitHub and AWS S3.
