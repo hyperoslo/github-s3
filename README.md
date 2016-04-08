@@ -23,6 +23,12 @@ repository on GitHub:
 $ s3-to-github hyperoslo/old-repository
 ```
 
+## Installation
+
+```
+$ curl -s --location http://raw.github.com/hyperoslo/github-s3/master/install.sh | sh
+```
+
 ## Configuration
 
 You'll need to set the following environment variables to use these scripts:
