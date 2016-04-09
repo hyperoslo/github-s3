@@ -40,9 +40,10 @@ You'll need to set the following environment variables to use these scripts:
 
 ## Hyper loves you
 
-[Hyper] made this. We're a bunch of awesome folks who are very passionate about
-building things. You should [tweet us](http://twitter.com/hyperoslo) if you
-can't get it to work. In fact, you should tweet us anyway. If you're using
-github-s3, we probably want to hire you.
+[Hyper] made this. We're a bunch of folks who love building things. You should
+[tweet us] if you can't get it to work. In fact, you should tweet us anyway.
+If you're using github-s3, we probably want to [hire you].
 
 [Hyper]: https://github.com/hyperoslo
+[tweet us]: http://twitter.com/hyperoslo
+[hire you]: http://www.hyper.no/jobs/engineers
