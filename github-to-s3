@@ -21,3 +21,4 @@ tar -C /tmp -zcf $ARCHIVE_PATH $NAME
 aws s3 mv $ARCHIVE_PATH s3://$GITHUB_S3_BUCKET/$NAME.tar.gz
 
 curl -X DELETE -H "Authorization: token $GITHUB_S3_GITHUB_TOKEN" https://api.github.com/repos/$1
+rm -rf $REPOSITORY_PATH $ARCHIVE_PATH

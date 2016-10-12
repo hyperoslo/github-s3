@@ -24,3 +24,4 @@ curl -s -X POST -H "Authorization: token $GITHUB_S3_GITHUB_TOKEN" \
   -d "{\"name\":\"$GITHUB_REPOSITORY_NAME\", \"private\": true}" > /dev/null
 
 git -C $REPOSITORY_PATH push
+rm -rf $REPOSITORY_PATH $ARCHIVE_PATH
