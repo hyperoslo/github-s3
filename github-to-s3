@@ -14,7 +14,6 @@ REPOSITORY_PATH=/tmp/$NAME
 
 rm -rf $REPOSITORY_PATH
 git clone --mirror git@github.com:$1 $REPOSITORY_PATH
-(cd $REPOSITORY_PATH && git fetch --tags)
 
 rm -rf $ARCHIVE_PATH
 tar -C /tmp -zcf $ARCHIVE_PATH $NAME
