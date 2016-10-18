@@ -14,7 +14,7 @@ NAME=$(echo $GITHUB_PATH | sed 's/\//-/')
 ARCHIVE_PATH=/tmp/$NAME.tar.gz
 REPOSITORY_PATH=/tmp/$NAME
 
-aws s3 mv s3://$GITHUB_S3_BUCKET/$NAME.tar.gz /tmp
+aws s3 cp s3://$GITHUB_S3_BUCKET/$NAME.tar.gz /tmp
 
 rm -rf $REPOSITORY_PATH
 tar -C /tmp -xf $ARCHIVE_PATH
@@ -23,4 +23,5 @@ curl -s -X POST -H "Authorization: token $GITHUB_S3_GITHUB_TOKEN" \
   https://api.github.com/orgs/$GITHUB_ORGANIZATION_NAME/repos \
   -d "{\"name\":\"$GITHUB_REPOSITORY_NAME\", \"private\": true}" > /dev/null
 
-git -C $REPOSITORY_PATH push
+git -C $REPOSITORY_PATH push --mirror
+rm -rf $REPOSITORY_PATH $ARCHIVE_PATH
