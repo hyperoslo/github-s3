@@ -7,6 +7,13 @@ if [ -z $GITHUB_S3_BUCKET ]; then
   return
 fi
 
+if [ "x$1" = "x-f" ]; then
+  NOFSCK=1
+  shift
+else
+  NOFSCK=0
+fi
+
 GITHUB_PATH=$1
 NAME=$(echo $GITHUB_PATH | sed 's/\//-/')
 ARCHIVE_PATH=/tmp/$NAME.tar.gz
@@ -14,6 +21,13 @@ REPOSITORY_PATH=/tmp/$NAME
 
 rm -rf $REPOSITORY_PATH
 git clone --mirror git@github.com:$1 $REPOSITORY_PATH
+
+if [ $NOFSCK -ne 1 ]; then
+  (
+    cd $REPOSITORY_PATH
+    git fsck
+  )
+fi
 
 rm -rf $ARCHIVE_PATH
 tar -C /tmp -zcf $ARCHIVE_PATH $NAME
